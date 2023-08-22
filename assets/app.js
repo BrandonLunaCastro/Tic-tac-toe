@@ -12,6 +12,6 @@ const gameDisplay = (function(){
 })();
 
 const Player = (option) => {
-        
+    
 
 }   

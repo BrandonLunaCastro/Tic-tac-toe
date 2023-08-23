@@ -22,7 +22,7 @@
 }
 .main{
     background-color: var(--color-2);
-    height: 100vh;
+    height: 780px;
 }
 .options{
     display: flex;
@@ -53,13 +53,13 @@
     justify-content: center;
     gap: 5px;
 }
-.board{
+.cell{
     width: 150px;
-    height: 120px;
+    height: 150px;
     border: 1px solid gray;
     border-radius: 4px;
 }
-.board:hover{
+.cell:hover{
     transform: translateY(-3px);
     cursor: pointer;
     box-shadow: inset 1px 1px 12px #676767;

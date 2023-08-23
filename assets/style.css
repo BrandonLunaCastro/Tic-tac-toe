@@ -23,7 +23,15 @@
 .main{
     background-color: var(--color-2);
     height: 780px;
+  
 }
+
+.open{
+    background-color: rgba(0 0 0 / .5);
+    position: relative;
+    z-index: 88;
+}
+
 .options{
     display: flex;
     flex-direction: column;

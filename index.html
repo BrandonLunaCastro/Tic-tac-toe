@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/b94ace870d.js" crossorigin="anonymous"></script>
-    <link href="assets/style.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/b94ace870d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="assets/style.css" rel="stylesheet" />
     <title>Tic tac toe</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <h1>Tic tac toe</h1>
+      <h1>Tic tac toe</h1>
     </header>
-    <main class="main ">
-         <section class="options">
+    <main class="main">
+      <section class="options">
+        <div class="players">
+          <form id="player__options">
             <div>
-                <label>Enter name</label>
-                <input type="text">
+                <label for="player__one">Player One</label>
+                <input type="text" name="playerOne" id="player__one"/>    
+                <select class="select__playerOne">
+                    <option >Select marker player one</option>
+                    <option value="x">X</option>
+                    <option value="o">O</option>
+                </select>
             </div>
-            <h2>Choose your marker</h2>
-            <div class="btns">
-                <button name="option-x" class="option" >X</button>
-                <button name="option-o" class="option" >O</button>
+            <div>
+                <label for="player__two">Player Two</label>
+                <input type="text" name="playerTwo" id="player__two" />   
+                <select class="select__playerTwo">
+                    <option>Select marker player two</option>
+                    <option value="x">X</option>
+                    <option value="o">O</option>
+                </select> 
             </div>
-         </section>   
-         <section class="game__board"> 
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-            <input type="button" class="cell">
-         </section>
-    </main>    
+            <button type="submit" name="submit" >Ready</button>
+          </form>
+        </div>  
+      </section>
+      <section class="game__board">
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+        <input type="button" class="cell" />
+      </section>
+      <div class="actual"></div>
+      <button>Replay</button>
+    </main>
     <footer>
-        <p>Design by Brandon Luna 2023</p>
-        <a href="https://github.com/BrandonLunaCastro" rel="noopener" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+      <p>Design by Brandon Luna 2023</p>
+      <a
+        href="https://github.com/BrandonLunaCastro"
+        rel="noopener"
+        target="_blank"
+        ><i class="fa-brands fa-github fa-2xl"></i
+      ></a>
     </footer>
     <script src="assets/app.js"></script>
-</body>
+  </body>
 </html>

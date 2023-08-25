@@ -4,37 +4,27 @@ const Player = (player, marker) => {
   return { getMarker, getPlayer };
 };
 
-const displayController = (function () {})();
-
 const GameBoard = (function () {
-  let cells = document.querySelectorAll(".cell");
   const gameBoard = [];
 
-  const fillBoard = () => {
-    cells.forEach((cell) => {
-      gameBoard.push(cell.innerText);
-    });
-    return gameBoard;
+
+  return {  
+    getBoard : function(){
+      return gameBoard
+    }
   };
 
-  const addMarker = (marker) => {
-    cells.forEach((cell) =>
-      cell.addEventListener("click", (e) => {
-        e.target.value = marker;
-        e.target.disabled = "";
-        gameBoard.push(e.target.value)
-      })
-    );
-  };
-
-  return { gameBoard, addMarker };
 })();
 
+
+
 const logicalGame = (function () {
+  
   let indexArrayO = [],
     indexArrayX = [];
 
   const takeIndex = (gameBoard) => {
+    console.log("initializing take index function")
     gameBoard.map((e, i) => {
       e === "x" ? indexArrayX.push(i) : indexArrayO.push(i);
     });
@@ -66,7 +56,7 @@ const logicalGame = (function () {
   };
 
   const winnerIs = (arr) => {
-    let player = arr === playerO ? "O" : "X";
+    let player = arr === 'playerO' ? "O" : "X";
     if (arr) {
       return `the winner is ${player}`;
     } else {
@@ -77,28 +67,89 @@ const logicalGame = (function () {
   return { takeIndex, reviewArray, winnerIs };
 })();
 
-const updateScreen = (function () {
-  let player1 = Player("pepe", "x"),
-    marker = player1.getMarker(),
-    name = player1.getPlayer();
+const controllerUI = (function () {
+  const selectors = {
+    inputPlayerOne: document.getElementById('player__one'),
+    inputPlayerTwo: document.getElementById('player__two'),
+    selectPlayerOne: document.querySelector(".select__playerOne"),
+    selectPlayerTwo: document.querySelector(".select__playerTwo"),
+    form: document.getElementById("player__options"),
+    cells: document.querySelectorAll(".cell"),
+  };
 
-  if (GameBoard.gameBoard.length === 0) {
-    console.log("entro al if true");
-
-    GameBoard.addMarker(marker);
-  
+  const submitData = function(){
+    console.log('initializing submit data')
+    selectors.form.addEventListener("submit",e => { 
+      e.preventDefault();
+      let p1 = selectors.inputPlayerOne.value,
+          p2 = selectors.inputPlayerTwo.value,
+          s1 = selectors.selectPlayerOne.value,
+          s2 = selectors.selectPlayerTwo.value
+     
+      dataPlayers = [
+          {
+            name: p1,
+            marker: s1
+          },
+          {
+            name: p2,
+            marker: s2
+          }
+        ]
+       // console.log(dataPlayers)
+        return dataPlayers 
+      })
   }
-  return { marker, name };
+  return {
+    addMarker: function (board,marker) {
+      selectors.cells.forEach((cell) =>
+        cell.addEventListener("click", (e) => {
+          e.target.value = marker;
+          e.target.disabled = "";
+          board.push(e.target.value);
+        })
+      );
+    },submitData
+    
+  };
 })();
 
-//prueba
-let boardArr = GameBoard.gameBoard;
-const positionArr = logicalGame.takeIndex(boardArr);
+const gameDisplay = (function(){
+  const playerOne = Player();
+  const playerTWo = Player();
+  
+  const dataPlayers = controllerUI.submitData()
+  console.log(dataPlayers)
+  return {
+    showPlayers : function(){
+      console.log(dataPlayers)
+    }
+  }
 
-let playerX = logicalGame.reviewArray(positionArr.indexArrayX);
-let playerO = logicalGame.reviewArray(positionArr.indexArrayO);
+})();
 
-/* console.log(logicalGame.winnerIs(playerO));
-console.log(logicalGame.winnerIs(playerX));
- */
-updateScreen;
+const updateScreen = (function(){
+    const observer = new MutationObserver((board)=> {
+      board.forEach(element => {
+        
+      });
+    })
+
+})();
+
+const App = (function (controllerUI) {
+  return {  
+    init : function(){
+      console.log("initializing app..");
+      gameDisplay.showPlayers() ;  
+     //controllerUI.addMarker();
+      /*   let board = GameBoard.getBoard();
+      const player1 = Player("juan","x")
+      const marker = player1.getMarker()
+      console.log(board)
+      controllerUI.addMarker(board,marker)
+    */ }
+  }
+})(controllerUI);
+
+App.init();

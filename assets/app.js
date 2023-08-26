@@ -7,40 +7,32 @@ const Player = (player, marker) => {
 //this function realize the fill game board
 const GameBoard = (function () {
   const gameBoard = [];
+
+  const resetAllGame = () => {
+    console.log("Initializing resetAll game")
+  }
+
   return {
     getBoard: function () {
       return gameBoard;
     },
+    resetAllGame
   };
 })();
 //this function take care of logical game tic tac toe
-/* const logicalGame = (function () {
-  let indexArrayO = [],
-    indexArrayX = [];
-
-  const takeIndex = (gameBoard) => {
-    console.log("initializing take index function");
-    gameBoard.map((e, i) => {
-      if(e === "x" && !indexArrayX.includes(i)){
-        indexArrayX.push(i) 
-      }else if(e === "o" && !indexArrayO.includes(i)){
-        indexArrayO.push(i)
-      }
-    });
-    return { indexArrayO, indexArrayX };
-  };
-
+ const logicalGame = (function () {
+  let gameBoard = GameBoard.getBoard()
   const winOptions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
+    ["0", "1", "2"],
+    ["3", "4", "5"],
+    ["6", "7", "8"],
 
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
+    ["0", "3", "6"],
+    ["1", "4", "7"],
+    ["2", "5", "8"],
 
-    [0, 4, 8],
-    [2, 4, 6],
+    ["0", "4", "8"],
+    ["2", "4", "6"],
   ];
 
   const reviewArray = (arr) => {
@@ -54,21 +46,19 @@ const GameBoard = (function () {
     return res;
   };
 
-  const winnerIs = (arr) => {
-    let player = arr === "playerO" ? "O" : "X";
-    if (arr) {
-      return `the winner is ${player}`;
-    } else {
-      return `you lose ${player}`;
+  const winnerIs = (objX,objO) => {
+    let playerWinner = objX.state === true ? objX : objO.state === true ? objO : "DRAW";
+    if(playerWinner == objO || playerWinner == objX){
+      document.querySelector(".winner").innerText = `Congratulations the winner is ${playerWinner.name}!`
+    }else if (gameBoard.length >= 8){
+      document.querySelector(".winner").innerText = playerWinner || "Draw lets play again! "      
     }
   };
-
   return { 
-    takeIndex, 
     reviewArray, 
-    winnerIs 
+    winnerIs,
   };
-})(); */
+})(); 
 //function take care of User Interface
 const controllerUI = (function () {
   const selectorsDom = {
@@ -83,6 +73,13 @@ const controllerUI = (function () {
 
   const getSelectors = function () {
     return selectorsDom;
+  }
+
+  const dataFormat = function(state,name){
+    return {
+      state,
+      name
+    }
   }
 
   const getValueInputs = function (){
@@ -105,26 +102,35 @@ const controllerUI = (function () {
 
   let player = getValueInputs(),
     actualPlayer = player[0];
+  let arrayX = [] ,
+      arrayO = [] 
 
 
-  const clickEvent = (p1,p2,board,index,e) => {
+  const clickEvent = (p1,p2,board,e) => {
     document.querySelector(".actual").innerText = `Turns of player : ${actualPlayer.name == '' ? p2.name :  actualPlayer.name} `;
     actualPlayer = actualPlayer === p1 ? p2 : p1
     e.target.innerText = actualPlayer.marker;
     e.target.setAttribute('disabled','');
-    e.target.setAttribute('data-index',index)
-    board.push(e.target.dataset.index)
-    // board.push(e.target.innerText);
-    console.log(board)
-    
+    let dataIndex = e.target.dataset.index;
+    actualPlayer.marker === "x" ? arrayX.push(dataIndex) : arrayO.push(dataIndex)
+    board.push(e.target.innerText);
+    if(board.length >= 3 ){
+     let arrX = logicalGame.reviewArray(arrayX),
+         arrO = logicalGame.reviewArray(arrayO),
+         playerX = p1.marker === "x" ? p1 : p2 ,
+         playerO = p1.marker === "o" ? p1 : p2
+
+         let objX = dataFormat(arrX,playerX.name);
+         let objO = dataFormat(arrO,playerO.name)
+         console.log(logicalGame.winnerIs(objX,objO))
+    }   
   }
 
   const addMarker = function (p1,p2,board) {
-    cells.forEach((cell,index) => {
-      cell.addEventListener("click", clickEvent.bind(this,p1,p2,board,index),false);
+    cells.forEach((cell) => {
+      cell.addEventListener("click", clickEvent.bind(this,p1,p2,board,),false);
     });
   }
-
   // public methods
   return {
     getSelectors,
@@ -139,10 +145,33 @@ const App = (function () {
 
   const loadEvent = () => {
     const selectors = controllerUI.getSelectors();
+
+    //add event to reset board game
+    document.getElementById("replay").addEventListener("click",resetGame)
+
+    //add event to foresee choosing same selects
+    document.querySelector(".select__playerOne").addEventListener("change",detectSelectOptions)
+
     //add event to submit
     document
       .querySelector(selectors.form)
-      .addEventListener("submit", submitEvent);
+      .addEventListener("submit",submitEvent);
+  };
+
+  const resetGame = function(e){
+    console.log("replay")
+  }
+
+  const detectSelectOptions = function(e){
+      const selectedOption = e.target.value;
+      const selectTwoOptions = document.querySelector(".select__playerTwo").options
+      for(let el of selectTwoOptions){
+        selectedOption === el.value 
+         ? el.setAttribute("disabled","") 
+         : el.value !== "Select marker player two" 
+          ? el.removeAttribute("disabled") 
+          : false;
+      }
   };
   const submitEvent = function (e) {
     e.preventDefault();
@@ -164,17 +193,3 @@ const App = (function () {
 })();
 
 App.init();
-
-/* 
-
-
-
-
- 
-const updateScreen = (function () {
-  const observer = new MutationObserver((board) => {
-    board.forEach((element) => {});
-  });
-})();
-
- */

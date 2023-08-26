@@ -77,6 +77,10 @@
     background:var(--color-1)
 }
 
+.winner{
+    padding: 10px;
+}
+
 .cell{
     width: 150px;
     height: 150px;

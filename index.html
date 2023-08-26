@@ -22,7 +22,7 @@
                 <label for="player__one">Player One</label>
                 <input type="text" name="playerOne" id="player__one"/>    
                 <select class="select__playerOne">
-                    <option >Select marker player one</option>
+                    <option selected disabled>Select marker player one</option>
                     <option value="x">X</option>
                     <option value="o">O</option>
                 </select>
@@ -31,29 +31,31 @@
                 <label for="player__two">Player Two</label>
                 <input type="text" name="playerTwo" id="player__two" />   
                 <select class="select__playerTwo">
-                    <option>Select marker player two</option>
-                    <option value="x">X</option>
-                    <option value="o">O</option>
+                  <option selected disabled>Select marker player two</option>
+                  <option value="x">X</option>
+                  <option value="o">O</option>
                 </select> 
             </div>
             <button type="submit" name="submit" >Ready</button>
           </form>
+
         </div>  
       </section>
       <section class="game__board">
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
-        <button class="cell"></button>
+        <button class="cell" data-index="0" ></button>
+        <button class="cell" data-index="1" ></button>
+        <button class="cell" data-index="2" ></button>
+        <button class="cell" data-index="3" ></button>
+        <button class="cell" data-index="4" ></button>
+        <button class="cell" data-index="5" ></button>
+        <button class="cell" data-index="6" ></button>
+        <button class="cell" data-index="7" ></button>
+        <button class="cell" data-index="8" ></button>
       </section>
       <section class="game__options">
         <div class="actual"></div>
-        <button type="button" name="replay">Replay</button>
+        <h3 class="winner"></h3>
+        <button type="button" name="replay" id="replay">Replay</button>
       </section>
     </main>
     <footer>

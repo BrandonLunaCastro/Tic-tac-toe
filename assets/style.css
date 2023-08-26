@@ -3,7 +3,7 @@
     font-family: 'Open Sans', sans-serif;
     --color-1:#fde68a ;
     --color-2:#fffbeb;
-    --color-3: #dc2626;
+    
 
 }
 
@@ -61,11 +61,32 @@
     justify-content: center;
     gap: 5px;
 }
+.game__options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+.game__options > button{
+    width: 200px;
+    height: 56px;
+    border-radius: 12px;
+    border: none;
+    background:var(--color-1)
+}
+
 .cell{
     width: 150px;
     height: 150px;
     border: 1px solid gray;
     border-radius: 4px;
+}
+.cell:disabled{
+    appearance: none;
+    background-color: var(--color-1);
+    color: #000;
 }
 .cell:hover{
     transform: translateY(-3px);

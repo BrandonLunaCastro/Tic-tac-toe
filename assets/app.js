@@ -96,11 +96,11 @@ const controllerUI = (function () {
     }
   };
 
-  //declaramos esta variable que posteriormente tomara una funcion
+
   let clickBound;
 
   const addMarker = function (p1, p2, board) {
-    //le vinculamos la funcion manejadora de eventos
+    //vinculate clickbound to function handle event
     clickBound = function (e) {
       clickEvent(p1, p2, board, e);
     };
@@ -114,7 +114,7 @@ const controllerUI = (function () {
     cells.forEach((cell) => {
       cell.innerText = "";
       cell.removeAttribute("disabled");
-      //luego eliminamos el evento como tal
+      //remove event clickBound
       cell.removeEventListener("click", clickBound, false);
     });
   };
@@ -167,10 +167,10 @@ const logicalGame = (function () {
       objX.state === true ? objX : objO.state === true ? objO : "";
     if (playerWinner == objO || playerWinner == objX) {
       document.querySelector(selectors.winner).innerText = `Congratulations the winner is ${playerWinner.name}!`;
-      document.querySelector(selectors.actual).innerText = '';
+      document.querySelector(selectors.actual).innerText = " ";
     } else if (gameBoard.length >= 8) {
       document.querySelector(selectors.winner).innerText = "Draw lets play again! ";
-      document.querySelector(selectors.actual).innerText = ''
+      document.querySelector(selectors.actual).innerText = " ";
     }
   };
   return {
@@ -178,9 +178,6 @@ const logicalGame = (function () {
     winnerIs,
   };
 })();
-
-
-
 //function take care of running the application
 const App = (function () {
   //event listener of input fields players
@@ -208,9 +205,7 @@ const App = (function () {
 
   const detectSelectOptions = function (e) {
     const selectedOption = e.target.value;
-    const selectTwoOptions = document.querySelector(
-      selectors.selectPlayerTwo
-    ).options;
+    const selectTwoOptions = document.querySelector(selectors.selectPlayerTwo).options;
     for (let el of selectTwoOptions) {
       selectedOption === el.value
         ? el.setAttribute("disabled", "")

@@ -8,17 +8,17 @@
       crossorigin="anonymous"
     ></script>
     <link href="assets/style.css" rel="stylesheet" />
-    <title>Tic tac toe</title>
-  </head>
+    <title>Tic-tac-toe</title>
+    <link rel="icon" href="assets/img/tic-tac-toe.png">
+  </head> 
   <body>
-    <header class="header">
-      <h1>Tic tac toe</h1>
-    </header>
     <main class="main">
       <section class="options">
+        <h1>Tic tac toe</h1>
+        <article>
         <div class="players">
           <form id="player__options">
-            <div>
+            <div class="optn__playerOne">
                 <label for="player__one">Player One</label>
                 <input type="text" name="playerOne" id="player__one"/>    
                 <select class="select__playerOne">
@@ -27,7 +27,7 @@
                     <option value="o">O</option>
                 </select>
             </div>
-            <div>
+            <div class="optn__playerTwo">
                 <label for="player__two">Player Two</label>
                 <input type="text" name="playerTwo" id="player__two" />   
                 <select class="select__playerTwo">
@@ -36,27 +36,31 @@
                   <option value="o">O</option>
                 </select> 
             </div>
-            <button type="submit" name="submit" >Ready</button>
+            </article>
+            <button type="submit" name="submit" id="ready"  > <span>Ready</span></button>
+          
           </form>
-
         </div>  
       </section>
+     <article> 
       <section class="game__board">
-        <button class="cell" data-index="0" ></button>
-        <button class="cell" data-index="1" ></button>
-        <button class="cell" data-index="2" ></button>
-        <button class="cell" data-index="3" ></button>
-        <button class="cell" data-index="4" ></button>
-        <button class="cell" data-index="5" ></button>
-        <button class="cell" data-index="6" ></button>
-        <button class="cell" data-index="7" ></button>
-        <button class="cell" data-index="8" ></button>
+        <button class="cell  cell-1 " data-index="0" ></button>
+        <button class="cell  cell-2" data-index="1" ></button>
+        <button class="cell  cell-3" data-index="2" ></button>
+        <button class="cell  cell-4" data-index="3" ></button>
+        <button class="cell  cell-5" data-index="4" ></button>
+        <button class="cell  cell-6" data-index="5" ></button>
+        <button class="cell  cell-7" data-index="6" ></button>
+        <button class="cell  cell-8" data-index="7" ></button>
+        <button class="cell  cell-9" data-index="8" ></button>
       </section>
       <section class="game__options">
         <div class="actual"></div>
         <h3 class="winner"></h3>
-        <button type="button" name="replay" id="replay">Replay</button>
+        <button type="button" name="replay" id="replay"><span>Replay</span></button>
+        
       </section>
+    </article>
     </main>
     <footer>
       <p>Design by Brandon Luna 2023</p>
